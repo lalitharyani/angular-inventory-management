@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => {sessions: 'sessions'}
 
+  resources :products
+
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales

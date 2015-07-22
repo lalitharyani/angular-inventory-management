@@ -1,4 +1,4 @@
-var app = angular.module('InventoryManagement', ['templates', 'ngRoute','Devise', 'public.ctrl.signIn',
+var app = angular.module('InventoryManagement', ['templates', 'ngResource', 'ngRoute', 'Devise', 'public.ctrl.signIn',
   'public.ctrl.sessions']);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -6,9 +6,13 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/', {
       templateUrl: '/angular_views/landing/landing.html',
       controller: 'HomeCtrl'
-    })
-    .when('/admin', {
+
+    }).when('/admin', {
       templateUrl: '/angular_views/admin/index.html',
+      controller: 'HomeCtrl'
+      
+    }).when('/new', {
+      templateUrl: '/angular_views/admin/new.html',
       controller: 'HomeCtrl'
       
     })

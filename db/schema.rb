@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720074153) do
+ActiveRecord::Schema.define(version: 20150722083424) do
+
+  create_table "products", force: true do |t|
+    t.string  "name"
+    t.string  "product_type"
+    t.float   "cost",          limit: 24
+    t.float   "discount",      limit: 24
+    t.boolean "in_offer_list",            default: false
+    t.boolean "out_of_stock",             default: false
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
