@@ -9,11 +9,15 @@ app.config(['$routeProvider', function($routeProvider) {
 
     }).when('/admin', {
       templateUrl: '/angular_views/admin/index.html',
-      controller: 'HomeCtrl'
+      controller: 'AdminCtrl'
       
     }).when('/new', {
       templateUrl: '/angular_views/admin/new.html',
-      controller: 'HomeCtrl'
+      controller: 'AdminCtrl'
+      
+    }).when('/edit/:id', {
+      templateUrl: '/angular_views/admin/edit.html',
+      controller: 'AdminCtrl'
       
     })
     .when('/sign_in', {

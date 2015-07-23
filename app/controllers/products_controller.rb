@@ -27,6 +27,54 @@ class ProductsController < ApplicationController
   end
 
 
+  def show
+    product = Product.where(id: params[:id]).first
+    render json: product
+  end
+
+
+  def update
+
+     product = Product.where(id: params[:id]).first
+
+     response = {}
+
+    if product.update(product_params)
+
+      response['status'] = "success"
+      response['msg'] = "Product updated successfully."
+           
+    else
+      response['status'] = "error"
+      response["msg"] = product.errors.full_messages.join(", ")
+    end
+
+    render json: response
+
+  end
+  
+
+  def destroy
+
+    product = Product.where(id: params[:id]).first
+
+    response = {}
+
+   if product.destroy
+      response['status'] = "success"
+      response['msg'] = "Product deleted successfully."
+           
+    else
+      response['status'] = "error"
+      response["msg"] = "Error while deleting the product."
+    end
+
+    render json: response
+
+  end
+
+
+
 	private
 
 	def product_params

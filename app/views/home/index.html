@@ -2,9 +2,13 @@
 <body ng-app="InventoryManagement">
  <div class="container">
     <div class="header">
+
       <nav>
         <ul class="nav nav-pills pull-right" ng-controller="sessionCtrl as session">
-          <li role="presentation"><a href="#/">Home</a></li>
+           <div data-ng-init="session.getCurrentUser();"></div>
+           <li role="presentation"><a href="#/">Home</a></li>
+
+           <li role="presentation" ng-if="user.admin"><a href="#/admin">Admin Dashboard</a></li>
           <li role="presentation" ng-hide="isAuthenticated"><a href="#/sign_in">Log In</a></li>
           <li role="presentation" ng-show="isAuthenticated"><a href ="javascript:" ng-click="session.logout()">Logout</a></li>
         </ul>
