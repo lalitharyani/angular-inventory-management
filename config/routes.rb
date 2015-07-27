@@ -52,7 +52,10 @@ Rails.application.routes.draw do
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
 
-  #resources :home, only: [:index]
+  #resources :home, only: [:index, ]
+
+  post 'home/search' => 'home#search'
+  post 'home/admin_search' => 'home#admin_search'
   root 'home#index'
 
   # Example resource route within a namespace:

@@ -1,9 +1,11 @@
 'use strict';
 
 var app = angular.module('InventoryManagement');
-app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location', '$routeParams', 
-  function(Auth, $scope, $window, Product, $location, $routeParams){
+app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location', '$routeParams', '$http', 'SearchProduct',
+  function(Auth, $scope, $window, Product, $location, $routeParams, $http, SearchProduct){
   
+  $scope.products = [];
+ 
   //fetch current logged in user on page init
   $scope.init = function () {
   	Auth.currentUser().then(function(user) {
@@ -14,10 +16,7 @@ app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location'
    }
 
   $scope.init();
-  
-  //get all products for db
-  $scope.products = Product.query();
-  
+
   //if admin comes from edit product
   if($routeParams.id){
     var product = Product.get({ id: $routeParams.id }, function() {
@@ -25,12 +24,16 @@ app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location'
     }); // get() returns a single entry
   }
 
+  //search products for admin input
+  $scope.search = function(q){
 
+    SearchProduct.getData(q, 'admin_search').success(function(data){
+      $scope.products = data;
+    });
 
- /* $scope.isUserAuthenticated = function(){
-    Auth.isAuthenticated();     
-  };*/
-  
+  };
+ 
+
   //Add new Product
   $scope.addProduct = function(){
     
@@ -49,7 +52,6 @@ app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location'
       
     });
  
-
   };
   
   //Delete product from DB
@@ -89,7 +91,6 @@ app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location'
     });
 
   };
-
 
 
 

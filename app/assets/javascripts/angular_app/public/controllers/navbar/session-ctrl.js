@@ -12,6 +12,7 @@
 
       $scope.$on('devise:login', function(event, currentUser) {
         $scope.isAuthenticated = true;
+        $scope.isAdmin = currentUser.admin;
         // You can get data of current user (getting user's name and etc.)
         
         //alert(currentUser.name);
@@ -19,6 +20,7 @@
 
       $scope.$on('devise:new-session', function(event, currentUser) {
         $scope.isAuthenticated = true;
+        $scope.isAdmin = currentUser.admin;
       });
 
       $scope.$on('devise:logout', function(event, oldCurrentUser) {
