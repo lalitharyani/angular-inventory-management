@@ -1,3 +1,4 @@
+'use strict';
 app.factory("Product", function($resource) {
   return $resource("/products/:id", { id: "@id" },
     {

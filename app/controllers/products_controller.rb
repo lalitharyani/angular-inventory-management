@@ -1,7 +1,13 @@
 class ProductsController < ApplicationController
  
 	def index
-    products = Product.all
+
+    if current_user && current_user.admin?
+      products = Product.all
+    else
+      products = Product.where(out_of_stock: false)
+    end
+
     render json: products
   end
 

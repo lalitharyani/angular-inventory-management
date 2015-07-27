@@ -4,7 +4,7 @@ var app = angular.module('InventoryManagement');
 app.controller('AdminCtrl', ['Auth', '$scope', '$window', 'Product', '$location', '$routeParams', '$http', 'SearchProduct',
   function(Auth, $scope, $window, Product, $location, $routeParams, $http, SearchProduct){
   
-  $scope.products = [];
+  $scope.products = Product.query();
  
   //fetch current logged in user on page init
   $scope.init = function () {

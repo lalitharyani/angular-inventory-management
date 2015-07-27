@@ -1,3 +1,4 @@
+'use strict';
 //Factory for Search Products from DB
 app.factory('SearchProduct', function($http) {
  return{
