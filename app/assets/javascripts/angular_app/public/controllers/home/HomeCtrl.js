@@ -6,6 +6,7 @@ app.controller('HomeCtrl', ['Auth', '$scope', 'Product', '$location', '$http', '
    $scope.products = [];
    $scope.lastSearched = [];
    var prod = {};
+  
 
    //fetch products those are in stock
    $scope.products = Product.query({ out_of_stock: false });
@@ -34,6 +35,7 @@ app.controller('HomeCtrl', ['Auth', '$scope', 'Product', '$location', '$http', '
     var existing_product = {};
     var new_product = {};
     $scope.lastSearched = [];
+    $scope.products = [];
 
     SearchProduct.getData(q, 'search').success(function(data){
       
@@ -42,13 +44,13 @@ app.controller('HomeCtrl', ['Auth', '$scope', 'Product', '$location', '$http', '
       
       //add new search data in local storage
       angular.forEach(data, function(new_product) {
+        
         localStorage.setItem( "product" +new_product.id, JSON.stringify(new_product) );
      });
 
-      $scope.products = data;
-
       // for last searched items
       for( prod in localStorage ) {
+        $scope.products.push( angular.fromJson( localStorage[prod] ) );
         $scope.lastSearched.push( angular.fromJson( localStorage[prod] ) );
       }
             
@@ -56,14 +58,14 @@ app.controller('HomeCtrl', ['Auth', '$scope', 'Product', '$location', '$http', '
 
 
   };
-  
-  //add product in local storage
-  $scope.addCart = function(productID){
-    $scope.productID = productID
-    $scope.status = "added";
-    localStorage.setItem( 'addProduct' +productID, JSON.stringify(productID) );
 
-    button_label = "Remove from Cart"
+
+  $scope.button_label = "Add To Cart";
+  
+  //add product 
+  $scope.add = function(productID){
+    $scope.button_label = "Remove from Cart"
+    $scope.productID = productID    
 
   };
 
